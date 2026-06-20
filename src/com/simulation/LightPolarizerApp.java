@@ -307,13 +307,13 @@ public class LightPolarizerApp extends JFrame {
             // Draw Slits (Parallel lines inside the circle, rotated)
             g2.setStroke(new BasicStroke(2.0f));
             g2.setColor(new Color(100, 220, 255, 180));
-            for (double yLocal = -radius + 0.2; yLocal <= radius - 0.2; yLocal += 0.24) {
-                // Find intersections with boundary: zLocal = sqrt(R^2 - yLocal^2)
-                double zMax = Math.sqrt(radius * radius - yLocal * yLocal);
+            for (double zLocal = -radius + 0.2; zLocal <= radius - 0.2; zLocal += 0.24) {
+                // Find intersections with boundary: yLocal = sqrt(R^2 - zLocal^2)
+                double yMax = Math.sqrt(radius * radius - zLocal * zLocal);
                 
                 // Endpoints in local space
-                double yL1 = yLocal, zL1 = -zMax;
-                double yL2 = yLocal, zL2 = zMax;
+                double yL1 = -yMax, zL1 = zLocal;
+                double yL2 = yMax, zL2 = zLocal;
 
                 // Rotate local coords by theta around X axis
                 double yR1 = yL1 * Math.cos(theta) - zL1 * Math.sin(theta);
@@ -332,8 +332,8 @@ public class LightPolarizerApp extends JFrame {
             // Draw Bolder Central Axis Slit
             g2.setStroke(new BasicStroke(4.0f));
             g2.setColor(new Color(0, 255, 255, 255));
-            double yL1 = 0, zL1 = -radius;
-            double yL2 = 0, zL2 = radius;
+            double yL1 = -radius, zL1 = 0;
+            double yL2 = radius, zL2 = 0;
             double yR1 = yL1 * Math.cos(theta) - zL1 * Math.sin(theta);
             double zR1 = yL1 * Math.sin(theta) + zL1 * Math.cos(theta);
             double yR2 = yL2 * Math.cos(theta) - zL2 * Math.sin(theta);
